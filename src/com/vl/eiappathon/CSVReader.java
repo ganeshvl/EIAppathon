@@ -141,8 +141,8 @@ public class CSVReader {
 							sBean.setP_Result_TXNRefNo(tokens[P_Result_TXNRefNo]);
 							sBean.setP_Result_TXNDESC(tokens[P_Result_TXNDESC]);
 							
-							sBean.setP_Result_Amount(Double.parseDouble(tokens[P_Result_Amount]));
-							sBean.setP_Result_Balance(Double.parseDouble(tokens[P_Result_Balance]));
+							sBean.setP_Result_Amount(tokens[P_Result_Amount]);
+							sBean.setP_Result_Balance(tokens[P_Result_Balance]);
 							
 							String currency = tokens[P_Result_Currency];
 							

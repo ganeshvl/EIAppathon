@@ -93,8 +93,8 @@ public class DatabaseDetailsDataSource {
 							sBean.setP_Result_TXNRefNo(mCur.getString(mCur.getColumnIndex(MySQLiteHelper.PAST_Result_TXNRefNo)));
 							sBean.setP_Result_TXNDESC(mCur.getString(mCur.getColumnIndex(MySQLiteHelper.PAST_Result_TXNDESC)).trim());
 							sBean.setP_Result_Currency(mCur.getString(mCur.getColumnIndex(MySQLiteHelper.PAST_Result_Currency)).trim());
-							sBean.setP_Result_Amount(mCur.getLong(mCur.getColumnIndex(MySQLiteHelper.PAST_Result_Amount)));
-							sBean.setP_Result_Balance(mCur.getLong(mCur.getColumnIndex(MySQLiteHelper.PAST_Result_Balance)));
+							sBean.setP_Result_Amount(mCur.getString(mCur.getColumnIndex(MySQLiteHelper.PAST_Result_Amount)));
+							sBean.setP_Result_Balance(mCur.getString(mCur.getColumnIndex(MySQLiteHelper.PAST_Result_Balance)));
 							cBeanAL.add(sBean);
 						} while (mCur.moveToNext());
 					}

@@ -40,16 +40,16 @@ public class PastAccount {
 	public void setP_Result_Currency(String p_Result_Currency) {
 		P_Result_Currency = p_Result_Currency;
 	}
-	public double getP_Result_Amount() {
+	public String getP_Result_Amount() {
 		return P_Result_Amount;
 	}
-	public void setP_Result_Amount(double p_Result_Amount) {
+	public void setP_Result_Amount(String p_Result_Amount) {
 		P_Result_Amount = p_Result_Amount;
 	}
-	public double getP_Result_Balance() {
+	public String getP_Result_Balance() {
 		return P_Result_Balance;
 	}
-	public void setP_Result_Balance(double p_Result_Balance) {
+	public void setP_Result_Balance(String p_Result_Balance) {
 		P_Result_Balance = p_Result_Balance;
 	}
 	private int P_Result_AccountNo = 0;
@@ -57,7 +57,7 @@ public class PastAccount {
 	private String P_Result_TXNRefNo = null;
 	private String P_Result_TXNDESC = null;
 	private String P_Result_Currency = null;
-	private double P_Result_Amount = 0;
-	private double P_Result_Balance = 0;
+	private String P_Result_Amount = null;
+	private String P_Result_Balance = null;
 
 }
