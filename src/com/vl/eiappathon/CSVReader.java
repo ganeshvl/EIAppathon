@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +26,9 @@ public class CSVReader {
 	private static final String COMMA_DELIMITER = ",";
 
 	// PastAccount
-	private static final int P_Result_SNO = 0;
-	private static final int P_Result_AccountNo = 1;
-	private static final int P_Result_Date = 2;
+	private static final int P_Result_SNO = 2;
+	private static final int P_Result_AccountNo = 0;
+	private static final int P_Result_Date = 1;
 	private static final int P_Result_TXNRefNo = 3;
 	private static final int P_Result_TXNDESC = 4;
 	private static final int P_Result_Currency = 5;
@@ -138,9 +140,28 @@ public class CSVReader {
 							sBean.setP_Result_Date(tokens[P_Result_Date]);
 							sBean.setP_Result_TXNRefNo(tokens[P_Result_TXNRefNo]);
 							sBean.setP_Result_TXNDESC(tokens[P_Result_TXNDESC]);
-							sBean.setP_Result_Currency(tokens[P_Result_Currency]);
+							
 							sBean.setP_Result_Amount(Double.parseDouble(tokens[P_Result_Amount]));
 							sBean.setP_Result_Balance(Double.parseDouble(tokens[P_Result_Balance]));
+							
+							String currency = tokens[P_Result_Currency];
+							
+							
+							 String password="asdf";
+							    MessageDigest digest=null;
+							    String hash = null;
+							    try {
+							        digest = MessageDigest.getInstance("SHA-256");
+							        digest.update(password.getBytes());
+
+							        hash = datasource.bytesToHexString(digest.digest());
+
+							        Log.i("Eamorr", "result is " + hash);
+							    } catch (NoSuchAlgorithmException e1) {
+							        // TODO Auto-generated catch block
+							        e1.printStackTrace();
+							    }
+							    sBean.setP_Result_Currency(hash);
 							datasource.insertPastAccountDetails(sBean);
 
 						} else if(accountType == 1)
