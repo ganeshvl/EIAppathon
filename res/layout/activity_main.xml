@@ -1,25 +1,99 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.vl.eiappathon.MainActivity" >
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+   android:background="@drawable/goal_complete_popup_bg"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView"
+    <ImageView
+        android:id="@+id/cross_mark_imageview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-    
-    
-     <Button
-         android:layout_marginTop="50dp"
-         android:id="@+id/submit_doc"
+        android:layout_marginRight="15dp"
+        
+        android:layout_gravity="right"
+        android:src="@drawable/blue_close" />
+
+    <RelativeLayout
+        android:id="@+id/goal_period_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp" >
+
+        <TextView
+            android:id="@+id/goal_period_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="Amount - "
+             />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/goal_completed_textviewq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit Document" />
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp" >
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/goal_complete_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:text=""
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/display_goal_name_textview"
+            android:singleLine="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="4dp"
+          	android:layout_marginRight="30dp"
+            android:layout_toRightOf="@+id/goal_complete_textview"
+            android:text="Completed"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/try_again_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/display_goal_name_textview"
+            android:text=""
+            android:textColor="#000000" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:orientation="horizontal"
+        android:layout_gravity="center"   >
+        <Button
+            android:id="@+id/no_thanks_button"
+             android:layout_margin="5dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"          
+            android:background="@drawable/no_thanks_button"
+            android:text="Cancel" />
+
+        <Button
+            android:id="@+id/renew_goal_button"
+             android:layout_margin="5dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"          
+            android:background="@drawable/renew_button"
+            android:text="Go" />
+
+        
+    </LinearLayout>
+
+</LinearLayout>

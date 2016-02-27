@@ -52,7 +52,7 @@ public class BlobGettingStartedTask extends AsyncTask<String, Void, Void> {
     @Override
     protected Void doInBackground(String... arg0) {
 
-       // act.printSampleStartInfo("BlobBasics");
+        act.printSampleStartInfo("BlobBasics");
 
         try {
             // Setup the cloud storage account.
@@ -138,7 +138,7 @@ public class BlobGettingStartedTask extends AsyncTask<String, Void, Void> {
             // List the blobs in a container, loop over them and
             // output the URI of each of them
             for (ListBlobItem blobItem : container.listBlobs()) {
-               // act.outputText(view, blobItem.getUri().toString());
+                act.outputText(view, blobItem.getUri().toString());
                 Log.d("sample", "uri is "+blobItem.getUri().toString());
             }
 
@@ -150,10 +150,10 @@ public class BlobGettingStartedTask extends AsyncTask<String, Void, Void> {
             // Delete the container
             //container.deleteIfExists();
         } catch (Throwable t) {
-            //act.printException(t);
+            act.printException(t);
         }
 
-        //act.printSampleCompleteInfo("BlobBasics");
+        act.printSampleCompleteInfo("BlobBasics");
 
         return null;
     }

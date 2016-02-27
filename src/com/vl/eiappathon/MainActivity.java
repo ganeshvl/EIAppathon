@@ -2,6 +2,8 @@ package com.vl.eiappathon;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_main1);
 		try
 		{
 
@@ -136,9 +138,9 @@ public class MainActivity extends ActionBarActivity {
 				TextView textView = (TextView) findViewById(R.id.textView);
 				new BlobGettingStartedTask(this, textView, mPhotoFileUri)
 				.execute();
-				//            Intent shareIntent = new Intent(this, MainActivity.class);
-				//            shareIntent.putExtra("photo",""+mPhotoFileUri);
-				//            startActivity(shareIntent);
+				            Intent shareIntent = new Intent(this, AnotherBarActivity.class);
+				            shareIntent.putExtra("photo",""+mPhotoFileUri);
+				            startActivity(shareIntent);
 			}
 
 		}
@@ -171,9 +173,74 @@ public class MainActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
+		
 		return super.onOptionsItemSelected(item);
+	}
+	
+	/**
+	 * Prints the specified text value to the view and to LogCat.
+	 * 
+	 * @param view
+	 *            The view to print to.
+	 * @param value
+	 *            The value to print.
+	 */
+	public void outputText(final TextView view, final String value) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				view.append(value + "\n");
+				System.out.println(view);
+			}
+		});
+	}
+
+	/**
+	 * Clears the text from the specified view.
+	 * 
+	 * @param view
+	 *            The view to clear.
+	 */
+	public void clearText(final TextView view) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				view.setText("");
+			}
+		});
+	}
+
+	/**
+	 * Prints out the exception information .
+	 */
+	public void printException(Throwable t) {
+		StringWriter stringWriter = new StringWriter();
+		PrintWriter printWriter = new PrintWriter(stringWriter);
+		t.printStackTrace(printWriter);
+		outputText(
+				(TextView) findViewById(R.id.textView),
+				String.format(
+						"Got an exception from running samples. Exception details:\n%s\n",
+						stringWriter.toString()));
+	}
+
+	/**
+	 * Prints out the sample start information .
+	 */
+	public void printSampleStartInfo(String sampleName) {
+		TextView view = (TextView) findViewById(R.id.textView);
+		clearText(view);
+		outputText(view, String.format(
+				"The Azure storage client library sample %s is starting...",
+				sampleName));
+	}
+
+	/**
+	 * Prints out the sample complete information .
+	 */
+	public void printSampleCompleteInfo(String sampleName) {
+		outputText((TextView) findViewById(R.id.textView), String.format(
+				"The Azure storage client library sample %s completed.\n",
+				sampleName));
 	}
 }
