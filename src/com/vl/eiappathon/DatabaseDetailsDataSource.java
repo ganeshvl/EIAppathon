@@ -211,6 +211,7 @@ public class DatabaseDetailsDataSource {
 			contentValue.put(MySQLiteHelper.Future_Result_Amount, bean.getF_Result_Amount());
 			contentValue.put(MySQLiteHelper.Future_Result_LocalCurrency, bean.getF_Result_LocalCurrency());
 			contentValue.put(MySQLiteHelper.Future_Result_LocalAmount, bean.getF_Result_LocalAmount());
+			contentValue.put(MySQLiteHelper.Future_Result_ClosingBalance, bean.getF_Result_ClosingBalance());
 			return database.insert(MySQLiteHelper.FUTURE_ACCOUNT, null, contentValue);
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -227,7 +228,7 @@ public class DatabaseDetailsDataSource {
 		String[] columns = new String[] { MySQLiteHelper.Future_Result_InstType,
 				MySQLiteHelper.Future_Result_Date, MySQLiteHelper.Future_Result_TXNDesc, MySQLiteHelper.Future_Result_VendorCustomer,
 				MySQLiteHelper.Future_Result_Indicator, MySQLiteHelper.Future_Result_Original_Currency, MySQLiteHelper.Future_Result_Amount,
-				MySQLiteHelper.Future_Result_LocalCurrency, MySQLiteHelper.Future_Result_LocalAmount };
+				MySQLiteHelper.Future_Result_LocalCurrency, MySQLiteHelper.Future_Result_LocalAmount, MySQLiteHelper.Future_Result_ClosingBalance};
 
 		String selection = /* MySQLiteHelper.CS_C1_CONDITION+" = ?" */null;
 		String[] selectionArgs = /* new String[]{Condition} */null;
@@ -250,6 +251,7 @@ public class DatabaseDetailsDataSource {
 							sBean.setF_Result_Amount(mCur.getLong(mCur.getColumnIndex(MySQLiteHelper.Future_Result_Amount)));
 							sBean.setF_Result_LocalCurrency(mCur.getString(mCur.getColumnIndex(MySQLiteHelper.Future_Result_LocalCurrency)));
 							sBean.setF_Result_LocalAmount(mCur.getLong(mCur.getColumnIndex(MySQLiteHelper.Future_Result_LocalAmount)));
+							sBean.setF_Result_ClosingBalance(mCur.getString(mCur.getColumnIndex(MySQLiteHelper.Future_Result_ClosingBalance)));
 							cBeanAL.add(sBean);
 						} while (mCur.moveToNext());
 					}

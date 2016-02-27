@@ -43,7 +43,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	public static final String Future_Result_Amount = "OriginalAMount";
 	public static final String Future_Result_LocalCurrency = "LocalCurrency";
 	public static final String Future_Result_LocalAmount = "LocalAmount";
-
+	public static final String Future_Result_ClosingBalance = "ClosingBalance";
 
 	
 	public static final String USER = "User";
@@ -110,6 +110,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 			+ " VARCHAR2(16),"
 			+ Future_Result_LocalCurrency
 			+ " VARCHAR2(3),"
+			+ Future_Result_ClosingBalance
+			+ " VARCHAR2(30),"
 			+ Future_Result_LocalAmount
 			+ " VARCHAR2(16));";
 

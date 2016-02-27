@@ -23,17 +23,20 @@ import com.github.mikephil.charting.components.XAxis.XAxisPosition;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.filter.Approximator;
 import com.github.mikephil.charting.data.filter.Approximator.ApproximatorType;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.vl.eiappathon.notimportant.DemoBase;
 import com.vl.eiappathon.utils.CurrentAccount;
 import com.vl.eiappathon.utils.FutureAccount;
 import com.vl.eiappathon.utils.PastAccount;
 
-public class AnotherBarActivity extends DemoBase implements OnSeekBarChangeListener {
+public class AnotherBarActivity extends DemoBase implements OnSeekBarChangeListener, OnChartValueSelectedListener {
 
 	private BarChart mChart;
 	private SeekBar mSeekBarX, mSeekBarY;
@@ -116,22 +119,22 @@ public class AnotherBarActivity extends DemoBase implements OnSeekBarChangeListe
 			}
 			if(pAList != null)
 			{
-				for(int i=0;i< pAList.size() - 8;i++)
+				for(int i=0;i< pAList.size();i++)
 				{
 					Log.d(TAG , "Indexing through pAList "+pAList.get(i).getP_Result_Currency());
-					if(pAList.get(i).getP_Result_Date().equalsIgnoreCase("07-01-2016"))
-					{
-						xVals.add("27-02-2016");	
-					}else
+//					if(pAList.get(i).getP_Result_Date().equalsIgnoreCase("07-01-2016"))
+//					{
+//						xVals.add("27-02-2016");	
+//					}else
 						xVals.add(pAList.get(i).getP_Result_Date());
-					//					try
-					//					{
-					//					yVals1.add(new BarEntry(Float.parseFloat(pAList.get(i).getP_Result_Amount()), i));
-					//					}
-					//					catch(Exception e)
-					//					{
-					//						yVals1.add(new BarEntry((float)-1, i));
-					//					}
+					try
+					{
+						yVals1.add(new BarEntry(Float.parseFloat(pAList.get(i).getP_Result_Balance()), i));
+					}
+					catch(Exception e)
+					{
+						yVals1.add(new BarEntry((float)-1, i));
+					}
 				}
 			}
 
@@ -141,29 +144,31 @@ public class AnotherBarActivity extends DemoBase implements OnSeekBarChangeListe
 				for(int i=0;i< cAList.size();i++)
 				{
 					Log.d(TAG  , "Indexing through cAList "+cAList.get(i).getC_Result_AccountNo());
-					xVals.add("27-02-2016");
+					xVals.add(cAList.get(i).getC_Result_CurrentDate());
+					yVals1.add(new BarEntry((float)cAList.get(i).getC_Result_CurrentBalance(), i));
 				}
 			}
 
 			ArrayList<FutureAccount> fAList = datasource.getFutureAccountDetails();
 			if(fAList != null)
 			{
-				for(int i=0;i< fAList.size() - 6;i++)
+				for(int i=0;i< fAList.size();i++)
 				{
 					Log.d(TAG , "Indexing through fAList "+fAList.get(i).getF_Result_InstType());
 					xVals.add(fAList.get(i).getF_Result_Date());
-					//					
-					//					try
-					//					{
-					//						yVals1.add(new BarEntry((float)fAList.get(i).getF_Result_Amount(), i));
-					//					}
-					//					catch(Exception e)
-					//					{
-					//						yVals1.add(new BarEntry((float)-1, i));
-					//					}
+
+					try
+					{
+						yVals1.add(new BarEntry(Float.parseFloat(fAList.get(i).getF_Result_ClosingBalance()), i));
+					}
+					catch(Exception e)
+					{
+						yVals1.add(new BarEntry((float)-1, i));
+					}
 				}
 			}
-			totalSize = pAList.size() + fAList.size();
+			if(pAList != null && fAList != null)
+				totalSize = pAList.size() + fAList.size();
 
 			datasource.close();
 		}
@@ -173,12 +178,12 @@ public class AnotherBarActivity extends DemoBase implements OnSeekBarChangeListe
 		}
 
 
-		for (int i = 0; i < totalSize - 13; i++) {
-			float mult = (500 + 1);
-			float val1 = (float) (Math.random() * mult) + mult / 3;
-			val1 = val1 - 325;
-			yVals1.add(new BarEntry((int) val1, i));
-		}
+		//		for (int i = 0; i < totalSize - 13; i++) {
+		//			float mult = (500 + 1);
+		//			float val1 = (float) (Math.random() * mult) + mult / 3;
+		//			val1 = val1 - 325;
+		//			yVals1.add(new BarEntry((int) val1, i));
+		//		}
 
 
 		//      
@@ -187,7 +192,7 @@ public class AnotherBarActivity extends DemoBase implements OnSeekBarChangeListe
 		//      }
 
 		BarDataSet set1 = new BarDataSet(yVals1, "Data Set");
-		set1.setColors(ColorTemplate.JOYFUL_COLORS);
+		set1.setColors(ColorTemplate.LIBERTY_COLORS);
 		set1.setDrawValues(true);
 		set1.setHighlightEnabled(true);
 
@@ -213,16 +218,18 @@ public class AnotherBarActivity extends DemoBase implements OnSeekBarChangeListe
 
 		data.setHighlightEnabled(true);
 		mChart.setOnTouchListener(new OnTouchListener() {
-			
+
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if(event.getAction() == MotionEvent.ACTION_UP)
 				{
-				startActivity(new Intent(AnotherBarActivity.this, PopupActivity.class));
+					startActivity(new Intent(AnotherBarActivity.this, PopupActivity.class));
 				}
 				return false;
 			}
 		});
+
+		//mChart.setOnChartValueSelectedListener(this);
 
 
 
@@ -363,6 +370,19 @@ public class AnotherBarActivity extends DemoBase implements OnSeekBarChangeListe
 
 	@Override
 	public void onStopTrackingTouch(SeekBar seekBar) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+		Log.d(TAG, "index is "+dataSetIndex);
+		Log.d(TAG, "Highlight is "+h.getStackIndex());
+
+	}
+
+	@Override
+	public void onNothingSelected() {
 		// TODO Auto-generated method stub
 
 	}

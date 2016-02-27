@@ -3,6 +3,13 @@ package com.vl.eiappathon.utils;
 public class FutureAccount {
 	//FutureAccount
 	private String F_Result_InstType = null;
+	private String F_Result_ClosingBalance = null;
+	public String getF_Result_ClosingBalance() {
+		return F_Result_ClosingBalance;
+	}
+	public void setF_Result_ClosingBalance(String f_Result_ClosingBalance) {
+		F_Result_ClosingBalance = f_Result_ClosingBalance;
+	}
 	public String getF_Result_InstType() {
 		return F_Result_InstType;
 	}

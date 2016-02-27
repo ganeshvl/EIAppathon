@@ -55,6 +55,7 @@ public class CSVReader {
 	private static final int F_Result_Original_Currency = 5;
 	private static final int F_Result_LocalCurrency = 7;
 	private static final int F_Result_LocalAmount = 8;
+	private static final int F_Result_CLosingAmount = 9;
 
 	private static String TAG = CSVReader.class.getSimpleName();
 	private static List<Result> Results;
@@ -188,6 +189,7 @@ public class CSVReader {
 							sBean.setF_Result_Amount(Double.parseDouble(tokens[F_Result_Original_Amount]));
 							sBean.setF_Result_LocalCurrency(tokens[F_Result_LocalCurrency]);
 							sBean.setF_Result_LocalAmount(Double.parseDouble(tokens[F_Result_LocalAmount]));
+							sBean.setF_Result_ClosingBalance(tokens[F_Result_CLosingAmount]);
 							datasource.insertFutureAccountDetails(sBean);
 						}
 					}
